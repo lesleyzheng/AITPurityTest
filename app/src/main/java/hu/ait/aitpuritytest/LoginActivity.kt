@@ -1,5 +1,6 @@
 package hu.ait.aitpuritytest
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -21,10 +22,10 @@ class LoginActivity : AppCompatActivity() {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(
             etEmail.text.toString(), etPassword.text.toString()
         ).addOnSuccessListener {
-            //startActivity(Intent(this@LoginActivity, ForumActivity::class.java))
-            Toast.makeText(this@LoginActivity,
-                "logged in",
-                Toast.LENGTH_LONG).show()
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+//            Toast.makeText(this@LoginActivity,
+//                "logged in",
+//                Toast.LENGTH_LONG).show()
         }.addOnFailureListener{
             Toast.makeText(this@LoginActivity,
                 "Login error: ${it.message}",

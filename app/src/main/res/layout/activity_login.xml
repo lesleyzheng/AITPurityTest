@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".ui.LoginActivity">
+    tools:context=".LoginActivity">
 
     <EditText
         android:id="@+id/etEmail"
@@ -18,7 +18,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="200dp"
         android:layout_marginEnd="24dp"
-
+        android:text="lesley@lesley.com"
         android:hint="@string/prompt_email"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
@@ -33,7 +33,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-
+        android:text="123456"
         android:hint="@string/prompt_password"
         android:imeActionLabel="@string/action_sign_in_short"
         android:imeOptions="actionDone"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AITPurityTest</string>
+    <string name="app_name">AIT Purity Test</string>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -11,4 +11,15 @@
     <string name="login_failed">"Login failed"</string>
     <string name="welcome_message">Welcome to AIT Purity Test</string>
     <string name="register">Register</string>
+    <string name="large_text">
+        "The (Official) AIT Purity Test was inspired by the Rice Purity Test "
+        "and serves as a segue from college life at US colleges to true study "
+        "abroad life at the Acquincum Institute of Technology, Budapest. It’s "
+        "a voluntary opportunity for the AIT student groups to bond, and for"
+        "students to track the maturation of their experiences throughout their "
+        "study abroad semester.\n\n"
+
+        "Caution: This is not a bucket list. Completion of all items on this test does not make you cooler.\n\n"
+    </string>
+    <string name="action_settings">Settings</string>
 </resources>
