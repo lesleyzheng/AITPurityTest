@@ -40,9 +40,13 @@ class SurveyActivity : AppCompatActivity() {
             if (reason == FinishReason.Completed) {
                 taskResult.results.forEach { stepResult ->
                     Log.e("logTag", "answer ${stepResult.results.firstOrNull()}")
-                    setResult(Activity.RESULT_OK)
-                    finish()
                 }
+                setResult(Activity.RESULT_OK)
+                finish()
+            }
+            if (reason == FinishReason.Discarded){
+                setResult(Activity.RESULT_OK)
+                finish()
             }
         }
 
