@@ -2,10 +2,11 @@ package hu.ait.aitpuritytest
 
 import android.app.Activity
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.core.content.ContextCompat
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.firestore.FirebaseFirestore
 import com.quickbirdstudios.surveykit.*
 import com.quickbirdstudios.surveykit.result.TaskResult
 import com.quickbirdstudios.surveykit.steps.CompletionStep
@@ -15,10 +16,10 @@ import com.quickbirdstudios.surveykit.steps.Step
 import com.quickbirdstudios.surveykit.survey.SurveyView
 import kotlinx.android.synthetic.main.activity_survey.*
 
+
 class SurveyActivity : AppCompatActivity() {
 
     private lateinit var surveyView: SurveyView
-    private var surveyResults = intArrayOf(100)
     private var surveyScore = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +28,7 @@ class SurveyActivity : AppCompatActivity() {
 
         surveyView = survey_view
         createSurvey()
+
     }
 
     private fun createSurvey(){
@@ -37,24 +39,19 @@ class SurveyActivity : AppCompatActivity() {
         surveyView.onSurveyFinish = { taskResult: TaskResult, reason: FinishReason ->
             if (reason == FinishReason.Completed) {
 
-                for ((index, result) in taskResult.results.get(1).results.withIndex()) {
-                    // Convert string answer to int value, 1=yes, 2=no
-                    var value = 0
-                    if (result.stringIdentifier == "yes") {
-                        value = 1
+                taskResult.results.forEach {
+                    // Log.e("logTag01", "${it.results[0]}")
+                    // Log.e("logTag01", "${it.results[0].stringIdentifier}")
+                    if (it.results[0].stringIdentifier == "yes") {
+                        surveyScore += 1
                     }
-                    // Save result
-                    surveyResults.set(index, value)
-                    surveyScore += value
                 }
-
-//                Log.e("logTag", "surveyScore ${surveyScore}")
-//                Log.e("logTag", "surveyResult ${surveyResults}")
-
+                // Log.e("logTag", "surveyScore ${surveyScore}")
                 setResult(Activity.RESULT_OK)
                 finish()
             }
             if (reason == FinishReason.Discarded){
+                Log.e("logTag", "discarded")
                 setResult(Activity.RESULT_OK)
                 finish()
             }
