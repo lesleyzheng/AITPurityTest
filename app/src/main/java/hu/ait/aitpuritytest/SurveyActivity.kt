@@ -11,6 +11,7 @@ import com.quickbirdstudios.surveykit.result.TaskResult
 import com.quickbirdstudios.surveykit.steps.CompletionStep
 import com.quickbirdstudios.surveykit.steps.InstructionStep
 import com.quickbirdstudios.surveykit.steps.QuestionStep
+import com.quickbirdstudios.surveykit.steps.Step
 import com.quickbirdstudios.surveykit.survey.SurveyView
 import kotlinx.android.synthetic.main.activity_survey.*
 
@@ -27,13 +28,7 @@ class SurveyActivity : AppCompatActivity() {
     }
 
     private fun createSurvey(){
-        var startStep = InstructionStep("AIT Purity Test", "Press start to begin the test", "Start")
-        var endStep = CompletionStep("You've finished!", "", "End Test")
-        var question1 = QuestionStep("Went to one country outside of Hungary?", "",
-            answerFormat = AnswerFormat.SingleChoiceAnswerFormat(listOf(TextChoice("yes"), TextChoice("no")))
-        )
-
-        val steps = listOf(startStep, question1, endStep)
+        val steps = makeSteps()
         val task = OrderedTask(steps)
 
         surveyView.onSurveyFinish = { taskResult: TaskResult, reason: FinishReason ->
@@ -59,5 +54,21 @@ class SurveyActivity : AppCompatActivity() {
         surveyView.start(task, configuration)
 
     }
+
+    private fun makeSteps() : List<Step>{
+        var startStep = InstructionStep("AIT Purity Test", "Press start to begin the test", "Start")
+        var endStep = CompletionStep("You've finished!", "", "End Test")
+
+        val steps = mutableListOf<Step>(startStep)
+        for (q in resources.getStringArray(R.array.surveyQuestions)) {
+            var question = QuestionStep(q, "",
+                answerFormat = AnswerFormat.SingleChoiceAnswerFormat(listOf(TextChoice("yes"), TextChoice("no")))
+            )
+            steps.add(question)
+        }
+        steps.add(endStep)
+        return steps
+    }
+
 
 }
