@@ -1,15 +1,24 @@
 package hu.ait.aitpuritytest
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_content.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    companion object{
+        const val PREF_NAME = "PREFUID"
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,11 +29,32 @@ class MainActivity : AppCompatActivity() {
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                .setAction("Action", null).show()
 //        }
+        var uid = getUID()
+        if (uid == "empty"){
+            saveUID()
+            uid = getUID()
+        }
 
         btnSurveyStart.setOnClickListener {
             startActivityForResult(Intent(this, SurveyActivity::class.java), 0)
         }
     }
+
+    private fun saveUID() {
+        var sharedPref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        //how to edit
+        var editor = sharedPref.edit()
+        editor.putString(FirebaseAuth.getInstance().currentUser!!.uid, UUID.randomUUID().toString())
+        editor.apply()
+    }
+
+    fun getUID(): String? {
+        var sharedPref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        var uid = sharedPref.getString(FirebaseAuth.getInstance().currentUser!!.uid, "empty")
+        Toast.makeText(this, uid, Toast.LENGTH_LONG).show()
+        return uid
+    }
+
 
     // Toolbar
 //    override fun onCreateOptionsMenu(menu: Menu): Boolean {
