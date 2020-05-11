@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.activity_survey.*
 class SurveyActivity : AppCompatActivity() {
 
     private lateinit var surveyView: SurveyView
+    private var surveyResults = intArrayOf(100)
+    private var surveyScore = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +31,8 @@ class SurveyActivity : AppCompatActivity() {
     private fun createSurvey(){
         var startStep = InstructionStep("AIT Purity Test", "Press start to begin the test", "Start")
         var endStep = CompletionStep("You've finished!", "", "End Test")
+
+        // List of Questions
         var question1 = QuestionStep("Went to one country outside of Hungary?", "",
             answerFormat = AnswerFormat.SingleChoiceAnswerFormat(listOf(TextChoice("yes"), TextChoice("no")))
         )
@@ -38,9 +42,21 @@ class SurveyActivity : AppCompatActivity() {
 
         surveyView.onSurveyFinish = { taskResult: TaskResult, reason: FinishReason ->
             if (reason == FinishReason.Completed) {
-                taskResult.results.forEach { stepResult ->
-                    Log.e("logTag", "answer ${stepResult.results.firstOrNull()}")
+
+                for ((index, result) in taskResult.results.get(1).results.withIndex()) {
+                    // Convert string answer to int value, 1=yes, 2=no
+                    var value = 0
+                    if (result.stringIdentifier == "yes") {
+                        value = 1
+                    }
+                    // Save result
+                    surveyResults.set(index, value)
+                    surveyScore += value
                 }
+
+//                Log.e("logTag", "surveyScore ${surveyScore}")
+//                Log.e("logTag", "surveyResult ${surveyResults}")
+
                 setResult(Activity.RESULT_OK)
                 finish()
             }
