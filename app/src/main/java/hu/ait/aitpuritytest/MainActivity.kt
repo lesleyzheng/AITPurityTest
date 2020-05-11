@@ -36,7 +36,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnSurveyStart.setOnClickListener {
-            startActivityForResult(Intent(this, SurveyActivity::class.java), 0)
+            var intentDetails = Intent()
+            intentDetails.setClass(this, SurveyActivity::class.java)
+            intentDetails.putExtra("UID", uid.toString())
+            startActivityForResult(intentDetails, 0)
         }
     }
 

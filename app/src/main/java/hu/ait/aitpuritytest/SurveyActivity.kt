@@ -5,7 +5,9 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.core.content.ContextCompat
+import com.google.firebase.firestore.FirebaseFirestore
 import com.quickbirdstudios.surveykit.*
 import com.quickbirdstudios.surveykit.result.TaskResult
 import com.quickbirdstudios.surveykit.steps.CompletionStep
@@ -13,6 +15,7 @@ import com.quickbirdstudios.surveykit.steps.InstructionStep
 import com.quickbirdstudios.surveykit.steps.QuestionStep
 import com.quickbirdstudios.surveykit.steps.Step
 import com.quickbirdstudios.surveykit.survey.SurveyView
+import hu.ait.aitpuritytest.data.Score
 import kotlinx.android.synthetic.main.activity_survey.*
 
 class SurveyActivity : AppCompatActivity() {
@@ -26,10 +29,11 @@ class SurveyActivity : AppCompatActivity() {
         setContentView(R.layout.activity_survey)
 
         surveyView = survey_view
-        createSurvey()
+        val uid = intent.getStringExtra("UID")
+        createSurvey(uid)
     }
 
-    private fun createSurvey(){
+    private fun createSurvey(uid: String){
       
         val steps = makeSteps()
         val task = OrderedTask(steps)
@@ -48,8 +52,17 @@ class SurveyActivity : AppCompatActivity() {
                     surveyScore += value
                 }
 
-//                Log.e("logTag", "surveyScore ${surveyScore}")
-//                Log.e("logTag", "surveyResult ${surveyResults}")
+               Log.e("logTag", "surveyScore ${surveyScore}")
+               Log.e("logTag", "surveyResult ${surveyResults}")
+
+                var postsCollection = FirebaseFirestore.getInstance().collection(
+                    "results")
+
+                postsCollection.document(uid).set(Score(uid, surveyScore)).addOnSuccessListener {
+                    Log.e("logtag", "success")
+                }.addOnFailureListener{
+                        Log.e("logtag", "failed")
+                    }
 
                 setResult(Activity.RESULT_OK)
                 finish()
