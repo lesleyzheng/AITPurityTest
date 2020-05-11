@@ -21,5 +21,11 @@
 
         "Caution: This is not a bucket list. Completion of all items on this test does not make you cooler.\n\n"
     </string>
+    <string-array name="surveyQuestions">
+        <item>white</item>
+        <item>sepia</item>
+        <item>black</item>
+        <item>pink</item>
+    </string-array>
     <string name="action_settings">Settings</string>
 </resources>
