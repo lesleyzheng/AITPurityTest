@@ -14,6 +14,7 @@ import com.quickbirdstudios.surveykit.steps.InstructionStep
 import com.quickbirdstudios.surveykit.steps.QuestionStep
 import com.quickbirdstudios.surveykit.steps.Step
 import com.quickbirdstudios.surveykit.survey.SurveyView
+import hu.ait.aitpuritytest.data.Score
 import kotlinx.android.synthetic.main.activity_survey.*
 
 
@@ -27,11 +28,11 @@ class SurveyActivity : AppCompatActivity() {
         setContentView(R.layout.activity_survey)
 
         surveyView = survey_view
-        createSurvey()
-
+        val uid = intent.getStringExtra("UID")
+        createSurvey(uid)
     }
 
-    private fun createSurvey(){
+    private fun createSurvey(uid: String){
       
         val steps = makeSteps()
         val task = OrderedTask(steps)
@@ -46,7 +47,18 @@ class SurveyActivity : AppCompatActivity() {
                         surveyScore += 1
                     }
                 }
-                // Log.e("logTag", "surveyScore ${surveyScore}")
+
+               Log.e("logTag", "surveyScore ${surveyScore}")
+
+                var postsCollection = FirebaseFirestore.getInstance().collection(
+                    "results")
+
+                postsCollection.document(uid).set(Score(uid, surveyScore)).addOnSuccessListener {
+                    Log.e("logtag", "success")
+                }.addOnFailureListener{
+                        Log.e("logtag", "failed")
+                    }
+
                 setResult(Activity.RESULT_OK)
                 finish()
             }
