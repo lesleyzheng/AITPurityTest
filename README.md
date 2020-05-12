@@ -1,6 +1,5 @@
 # AITPurityTest
-
-![Image of MVP](https://octodex.github.com/images/yaktocat.png)
+![Image of MVP](mvp_screenshot.png)
 
 # What is this?
 
