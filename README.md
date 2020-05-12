@@ -1,5 +1,5 @@
 # AITPurityTest
-![Image of MVP](mvp_screenshot.png)
+![Image of MVP](mvp_screenshot.png=100x)
 
 # What is this?
 
