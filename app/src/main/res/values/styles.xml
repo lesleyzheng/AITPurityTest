@@ -3,9 +3,14 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">#B9BAA3</item>
+        <item name="colorPrimaryDark">#0A100D</item>
+        <item name="colorSecondary">#F9F1C7</item>
+        <item name="colorSecondaryVariant">#D6D5C9</item>
+        <item name="colorAccent">#AA2421</item>
+        <item name="titleTextColor">#555555</item>
+        <item name="font">@font/neuton</item>
+        <item name="fontFamily">@font/neuton</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -13,8 +18,14 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary">#F9F1C7</item>
+        <item name="colorSecondary">#B9BAA3</item>
+    </style>
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorPrimary">#F9F1C7</item>
+        <item name="colorSecondary">#B9BAA3</item>
+    </style>
 
 </resources>

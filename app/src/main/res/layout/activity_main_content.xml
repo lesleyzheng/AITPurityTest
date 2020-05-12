@@ -12,15 +12,17 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/pattern"
+        android:elevation="0dp">
 
         <androidx.viewpager.widget.PagerTitleStrip
             android:id="@+id/viewPagerTab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            app:tabIndicatorHeight="4dp"
-            app:tabIndicatorColor="@android:color/holo_orange_light"/>
+            android:elevation="4dp"
+            app:tabIndicatorHeight="8dp" />
 
     </androidx.viewpager.widget.ViewPager>
 
