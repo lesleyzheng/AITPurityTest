@@ -1,5 +1,7 @@
 # AITPurityTest
 
+![Image of MVP](https://octodex.github.com/images/yaktocat.png)
+
 # What is this?
 
 We are creating an interactive mobile app that scores then analyzes a student's AIT (Acquincum Institute of Technology) Study Abroad Experience. This app was inspired by the Rice Purity Test. The questions are modified to be specific to AIT students who have studied abroad spring 2020.
