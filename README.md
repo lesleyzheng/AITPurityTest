@@ -1,5 +1,4 @@
 # AITPurityTest
-![Image of MVP](mvp_screenshot.png=100x)
 
 # What is this?
 
@@ -14,5 +13,7 @@ We are creating an interactive mobile app that scores then analyzes a student's 
 # Extensions
 
 We hope to add further question-based analysis.
+
+![Image of MVP](mvp_screenshot.png)
 
 _Last edited: May 12, 2020_
