@@ -1,14 +1,17 @@
 package hu.ait.aitpuritytest
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import hu.ait.aitpuritytest.data.Score
 import kotlinx.android.synthetic.main.fragment_results_page.*
@@ -17,6 +20,7 @@ class FragmentResults: Fragment() {
 
     companion object {
         const val TAG = "TAG_Fragment_Two"
+        const val PREF_NAME = "PREFUID"
     }
     private var tableData = mutableListOf(0,0,0,0,0,0,0,0,0,0)
 
@@ -28,9 +32,39 @@ class FragmentResults: Fragment() {
         var rootView =
             inflater.inflate(R.layout.fragment_results_page, container, false)
 
+        updateYourScore()
         calcTable()
         return rootView
     }
+
+    private fun getUID(): String? {
+        var sharedPref = activity!!.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        var uid = sharedPref.getString(FirebaseAuth.getInstance().currentUser!!.uid, "empty")
+        return uid
+    }
+
+    private fun updateYourScore() {
+        var postsCollection = FirebaseFirestore.getInstance().collection(
+            "results")
+        var uid = getUID().toString()
+        postsCollection.document(uid).get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    Log.e("your_score", "success")
+                    var score = document.toObject(Score::class.java)?.score
+                    tvYourScore.text = getString(R.string.your_score,score.toString())
+                    tvYourScore.invalidate()
+
+                } else {
+                    Log.e("your score", "No such document")
+                }
+            }
+            .addOnFailureListener{
+                Log.e("your score", "failure")
+
+            }
+    }
+
 
     private fun displayChart() {
         var entries = createEntries()
