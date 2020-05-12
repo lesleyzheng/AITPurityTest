@@ -9,18 +9,19 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnSurveyStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:text="Start Survey" />
+        <androidx.viewpager.widget.PagerTitleStrip
+            android:id="@+id/viewPagerTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            app:tabIndicatorHeight="4dp"
+            app:tabIndicatorColor="@android:color/holo_orange_light"/>
+
+    </androidx.viewpager.widget.ViewPager>
 
 </LinearLayout>
