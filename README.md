@@ -9,11 +9,15 @@ We are creating an interactive Android mobile app that scores then analyzes a st
 - Login using Firebase Authentication 
 - Interactive survey using Quick Bird Studios
 - Scores stored in Firebase under unique ids for privacy
-- Results page with a bar graph that compares your score against everyone else's score 
+- Results page with a bar graph that compares your score against everyone else's score
 
 # Extensions
 
 We hope to add further question-based analysis.
+
+# Check it out
+
+Try our app by downloading the apk file! If you need a password to access it, please feel free to reach out to us.
 
 ![Image of MVP](mvp_screenshot.png)
 
