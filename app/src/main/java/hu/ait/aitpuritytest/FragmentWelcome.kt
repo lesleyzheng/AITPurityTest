@@ -27,7 +27,7 @@ class FragmentWelcome: Fragment() {
             inflater.inflate(R.layout.fragment_welcome_page, container, false)
 
         var uid = getUID()
-        if (uid == "empty"){
+        if (uid == getString(R.string.empty_uid)){
             saveUID()
             uid = getUID()
         }
@@ -35,7 +35,7 @@ class FragmentWelcome: Fragment() {
         rootView.btnSurveyStart.setOnClickListener {
             var intentDetails = Intent()
             intentDetails.setClass(context!!, SurveyActivity::class.java)
-            intentDetails.putExtra("UID", uid.toString())
+            intentDetails.putExtra(getString(R.string.UID_extra), uid.toString())
             startActivityForResult(intentDetails, 0)
         }
 
