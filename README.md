@@ -6,9 +6,10 @@ We are creating an interactive Android mobile app that scores then analyzes a st
 
 # What features do we have?
 
-1. Interactive survey using Quick Bird Studios
-2. Results page that compares your score against everyone else's score
-3. Encryption of sensitive data to protect users' privacy
+- Login using Firebase Authentication 
+- Interactive survey using Quick Bird Studios
+- Scores stored in Firebase under unique ids for privacy
+- Results page with a bar graph that compares your score against everyone else's score 
 
 # Extensions
 
