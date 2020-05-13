@@ -34,6 +34,7 @@ class FragmentResults: Fragment() {
 
         updateYourScore()
         calcTable()
+
         return rootView
     }
 
@@ -84,8 +85,15 @@ class FragmentResults: Fragment() {
 
         var data = BarData(labels, dataset)
         chart.data = data
-        chart.setDescription("All Scores")
+        chart.setDescription("")
         chart.invalidate()
+
+        chart.getAxisLeft().setAxisMinValue(0f)
+        chart.getAxisRight().setAxisMinValue(0f)
+
+        dataset.setColor(resources.getColor(R.color.colorSecondaryVariant))
+        chart.getLegend().setEnabled(false)
+
     }
 
     private fun calcTable() {
