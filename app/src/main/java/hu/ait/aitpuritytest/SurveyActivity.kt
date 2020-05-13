@@ -46,6 +46,8 @@ class SurveyActivity : AppCompatActivity() {
                     }
                 }
 
+                surveyScore = 100-surveyScore
+
 
                 var postsCollection = FirebaseFirestore.getInstance().collection(
                     getString(R.string.results))
