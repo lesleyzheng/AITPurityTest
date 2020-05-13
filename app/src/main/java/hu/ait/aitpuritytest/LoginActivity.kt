@@ -23,9 +23,7 @@ class LoginActivity : AppCompatActivity() {
             etEmail.text.toString(), etPassword.text.toString()
         ).addOnSuccessListener {
             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-//            Toast.makeText(this@LoginActivity,
-//                "logged in",
-//                Toast.LENGTH_LONG).show()
+            finish()
         }.addOnFailureListener{
             Toast.makeText(this@LoginActivity,
                 "Login error: ${it.message}",
