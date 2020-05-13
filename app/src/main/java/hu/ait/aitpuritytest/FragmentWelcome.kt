@@ -27,7 +27,7 @@ class FragmentWelcome: Fragment() {
             inflater.inflate(R.layout.fragment_welcome_page, container, false)
 
         var uid = getUID()
-        if (uid == getString(R.string.empty_uid)){
+        if (uid == getString(R.string.empty)){
             saveUID()
             uid = getUID()
         }

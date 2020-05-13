@@ -28,7 +28,7 @@ class SurveyActivity : AppCompatActivity() {
         setContentView(R.layout.activity_survey)
 
         surveyView = survey_view
-        val uid = intent.getStringExtra("UID")
+        val uid = intent.getStringExtra(getString(R.string.UID_extra))
         createSurvey(uid)
     }
 
@@ -41,7 +41,7 @@ class SurveyActivity : AppCompatActivity() {
             if (reason == FinishReason.Completed) {
 
                 taskResult.results.forEach {
-                    if (it.results[0].stringIdentifier == "yes") {
+                    if (it.results[0].stringIdentifier == getString(R.string.yes)) {
                         surveyScore += 1
                     }
                 }

@@ -146,4 +146,5 @@
     <string name="end_test">End Test</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
+    <string name="UID_extra">UID</string>
 </resources>
