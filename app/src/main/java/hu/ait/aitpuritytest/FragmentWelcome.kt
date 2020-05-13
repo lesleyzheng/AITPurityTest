@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_welcome_page.view.*
@@ -45,7 +44,6 @@ class FragmentWelcome: Fragment() {
 
     private fun saveUID() {
         var sharedPref = activity!!.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        //how to edit
         var editor = sharedPref.edit()
         editor.putString(FirebaseAuth.getInstance().currentUser!!.uid, UUID.randomUUID().toString())
         editor.apply()
@@ -54,7 +52,6 @@ class FragmentWelcome: Fragment() {
     fun getUID(): String? {
         var sharedPref = activity!!.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         var uid = sharedPref.getString(FirebaseAuth.getInstance().currentUser!!.uid, "empty")
-        Toast.makeText(context, uid, Toast.LENGTH_LONG).show()
         return uid
     }
 
