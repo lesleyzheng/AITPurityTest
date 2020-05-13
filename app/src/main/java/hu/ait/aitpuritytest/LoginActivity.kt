@@ -54,11 +54,11 @@ class LoginActivity : AppCompatActivity() {
     fun isFormValid(): Boolean {
         return when {
             etEmail.text.isEmpty() -> {
-                etEmail.error = "This field cannot be empty"
+                etEmail.error = getString(R.string.email_error)
                 false
             }
             etPassword.text.isEmpty() -> {
-                etPassword.error = "The password cannot be empty"
+                etPassword.error = getString(R.string.pass_error)
                 false
             }
             else -> true
