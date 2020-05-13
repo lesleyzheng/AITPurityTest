@@ -34,75 +34,74 @@ class FragmentResults: Fragment() {
 
         updateYourScore()
         calcTable()
-
         return rootView
     }
 
     private fun getUID(): String? {
         var sharedPref = activity!!.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        var uid = sharedPref.getString(FirebaseAuth.getInstance().currentUser!!.uid, "empty")
+        var uid = sharedPref.getString(FirebaseAuth.getInstance().currentUser!!.uid, getString(R.string.empty))
         return uid
     }
 
     private fun updateYourScore() {
         var postsCollection = FirebaseFirestore.getInstance().collection(
-            "results")
+            getString(R.string.results))
         var uid = getUID().toString()
         postsCollection.document(uid).get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-                    Log.e("your_score", "success")
                     var score = document.toObject(Score::class.java)?.score
                     tvYourScore.text = getString(R.string.your_score,score.toString())
                     tvYourScore.invalidate()
 
-                } else {
-                    Log.e("your score", "No such document")
                 }
             }
             .addOnFailureListener{
-                Log.e("your score", "failure")
-
             }
     }
 
 
     private fun displayChart() {
         var entries = createEntries()
-        var dataset = BarDataSet(entries, "Scores")
-        var labels = ArrayList<String>()
-
-        labels.add("0")
-        labels.add("10")
-        labels.add("20")
-        labels.add("30")
-        labels.add("40")
-        labels.add("50")
-        labels.add("60")
-        labels.add("70")
-        labels.add("80")
-        labels.add("90")
+        var dataset = BarDataSet(entries, getString(R.string.scores))
+        var labels = getLabels()
 
         var data = BarData(labels, dataset)
         chart.data = data
         chart.setDescription("")
         chart.invalidate()
 
-        chart.getAxisLeft().setAxisMinValue(0f)
-        chart.getAxisRight().setAxisMinValue(0f)
+        chart.axisLeft.setAxisMinValue(0f)
+        chart.axisRight.setAxisMinValue(0f)
 
-        dataset.setColor(resources.getColor(R.color.colorSecondaryVariant))
-        chart.getLegend().setEnabled(false)
+        dataset.color = (R.color.colorSecondaryVariant)
+        chart.legend.isEnabled = false
 
     }
 
+    private fun getLabels() : ArrayList<String> {
+        var labels = ArrayList<String>()
+        labels.add(getString(R.string.zero))
+        labels.add(getString(R.string.ten))
+        labels.add(getString(R.string.twenty))
+        labels.add(getString(R.string.thirty))
+        labels.add(getString(R.string.forty))
+        labels.add(getString(R.string.fifty))
+        labels.add(getString(R.string.sixty))
+        labels.add(getString(R.string.seventy))
+        labels.add(getString(R.string.eighty))
+        labels.add(getString(R.string.ninety))
+        return labels
+
+    }
+
+
     private fun calcTable() {
         var postsCollection = FirebaseFirestore.getInstance().collection(
-            "results")
+            getString(R.string.results))
 
         postsCollection.get()
             .addOnSuccessListener { documents ->
-                Log.e("query", "success")
                 for (document in documents) {
                     var score = document.toObject(Score::class.java).score
                     var index = score/10
@@ -114,7 +113,6 @@ class FragmentResults: Fragment() {
                 displayChart()
             }
             .addOnFailureListener { exception ->
-                Log.e("query", "failure")
             }
     }
 

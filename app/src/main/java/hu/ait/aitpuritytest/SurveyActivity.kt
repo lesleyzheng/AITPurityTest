@@ -41,29 +41,23 @@ class SurveyActivity : AppCompatActivity() {
             if (reason == FinishReason.Completed) {
 
                 taskResult.results.forEach {
-                    // Log.e("logTag01", "${it.results[0]}")
-                    // Log.e("logTag01", "${it.results[0].stringIdentifier}")
                     if (it.results[0].stringIdentifier == "yes") {
                         surveyScore += 1
                     }
                 }
 
-               Log.e("logTag", "surveyScore ${surveyScore}")
 
                 var postsCollection = FirebaseFirestore.getInstance().collection(
-                    "results")
+                    getString(R.string.results))
 
                 postsCollection.document(uid).set(Score(uid, surveyScore)).addOnSuccessListener {
-                    Log.e("logtag", "success")
                 }.addOnFailureListener{
-                        Log.e("logtag", "failed")
                     }
 
                 setResult(Activity.RESULT_OK)
                 finish()
             }
             if (reason == FinishReason.Discarded){
-                Log.e("logTag", "discarded")
                 setResult(Activity.RESULT_OK)
                 finish()
             }
@@ -80,13 +74,15 @@ class SurveyActivity : AppCompatActivity() {
     }
 
     private fun makeSteps() : List<Step>{
-        var startStep = InstructionStep("AIT Purity Test", "Press start to begin the test", "Start")
-        var endStep = CompletionStep("You've finished!", "", "End Test")
+        var startStep = InstructionStep(getString(R.string.app_name), getString(R.string.press_start), getString(
+                    R.string.start))
+        var endStep = CompletionStep(getString(R.string.finish), "", getString(R.string.end_test))
 
         val steps = mutableListOf<Step>(startStep)
         for (q in resources.getStringArray(R.array.surveyQuestions)) {
             var question = QuestionStep(q, "",
-                answerFormat = AnswerFormat.SingleChoiceAnswerFormat(listOf(TextChoice("yes"), TextChoice("no")))
+                answerFormat = AnswerFormat.SingleChoiceAnswerFormat(listOf(TextChoice(getString(R.string.yes)), TextChoice(getString(
+                                    R.string.no))))
             )
             steps.add(question)
         }
