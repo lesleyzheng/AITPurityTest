@@ -15,31 +15,41 @@ class MainActivity : AppCompatActivity() {
     private lateinit var pagerTitleStrip: PagerTitleStrip
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayShowTitleEnabled(false);
 
+        viewPagerInit()
+        pagerTitleSettings()
+
+    }
+
+    private fun pagerTitleSettings() {
+        pagerTitleStrip = findViewById(R.id.viewPagerTab)
+        pagerTitleStrip.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+        pagerTitleStrip.setTextColor(resources.getColor(R.color.colorSecondaryVariant))
+    }
+
+    private fun viewPagerInit() {
+
         viewPager.adapter = MyPagerAdapter(supportFragmentManager)
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
             }
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
             }
             override fun onPageSelected(position: Int) {
                 (viewPager.adapter as MyPagerAdapter).notifyDataSetChanged()
             }
 
         })
-
-        pagerTitleStrip = findViewById(R.id.viewPagerTab)
-        pagerTitleStrip.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-        pagerTitleStrip.setTextColor(resources.getColor(R.color.colorSecondaryVariant))
-
-
     }
 
 }
