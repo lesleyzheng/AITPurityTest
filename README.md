@@ -19,6 +19,6 @@ We hope to add further question-based analysis.
 
 Try our app by downloading the apk file! If you need a password to access it, please feel free to reach out to us.
 
-![Image of MVP](mvp_screenshot.png)
+![Image of MVP](mvp.png)
 
-_Last edited: May 12, 2020_
+_Last edited: May 29, 2020_
